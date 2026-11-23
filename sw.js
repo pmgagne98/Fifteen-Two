@@ -1,5 +1,5 @@
 // Fifteen Two offline support. Bump VERSION whenever the app files change.
-const VERSION = 'fifteen-two-v4';
+const VERSION = 'fifteen-two-v5';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest'];
 
 self.addEventListener('install', e => {

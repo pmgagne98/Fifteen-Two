@@ -7,8 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Fifteen Two">
-<meta name="theme-color" content="#dde5dc" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0e2419" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#e6e3df" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161311" media="(prefers-color-scheme: dark)">
 <meta name="description" content="A clean cribbage board for your phone, with a hand counter that shows you how every point is scored.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon.png">
@@ -27,15 +27,15 @@ img{max-width:100%}
 <style>
 /* Layout: one-screen table. Opponent panel (flipped) on top, wooden board fills the middle, your panel at the bottom. */
 :root{
-  --table:#dde5dc; --panel:#f5f7f2; --raised:#ffffff; --ink:#1b2820; --muted:#5b6a60; --line:#c8d2c7; --brass:#9a6d22;
+  --table:#e6e3df; --panel:#f7f6f4; --raised:#ffffff; --ink:#1f1b18; --muted:#6b625a; --line:#d4cec7; --brass:#9a6d22;
   --wood1:#f0d39c; --wood2:#dcb575; --wood3:#a97a3e; --hole:#2a170a; --skunk:#b3221b;
   --card:#fbfbf7; --card-ink:#1a1a1a; --card-red:#c3262b;
   --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --body:"Inter", system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --table:#0e2419; --panel:#15331f; --raised:#1c3f29; --ink:#edf2ea; --muted:#9fb5a6; --line:#2a5238; --brass:#d8ab55; color-scheme:dark}}
-:root[data-theme="dark"]{--table:#0e2419; --panel:#15331f; --raised:#1c3f29; --ink:#edf2ea; --muted:#9fb5a6; --line:#2a5238; --brass:#d8ab55; color-scheme:dark}
+  --table:#161311; --panel:#221d1a; --raised:#2c2622; --ink:#f1ece6; --muted:#a99f95; --line:#3b332d; --brass:#d8ab55; color-scheme:dark}}
+:root[data-theme="dark"]{--table:#161311; --panel:#221d1a; --raised:#2c2622; --ink:#f1ece6; --muted:#a99f95; --line:#3b332d; --brass:#d8ab55; color-scheme:dark}
 
 [hidden]{display:none!important}
 html,body{height:100%}
@@ -43,10 +43,10 @@ body{background:var(--table); color:var(--ink); font-family:var(--body); overflo
 button{font:inherit; color:inherit; touch-action:manipulation; cursor:pointer}
 button:focus-visible,input:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
 
-.app{height:100%; box-sizing:border-box; max-width:520px; margin:0 auto; display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:8px;
-  padding-block:8px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+.app{height:100%; box-sizing:border-box; max-width:520px; margin:0 auto; display:grid; grid-template-rows:auto minmax(0,1fr) auto auto; gap:6px;
+  padding-block:6px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
 
-.panel{background:var(--panel); border-radius:18px; padding:10px 12px 12px; display:grid; gap:10px; transition:transform .4s}
+.panel{background:var(--panel); border-radius:16px; padding:8px 10px 10px; display:grid; gap:7px; transition:transform .4s}
 .panel.flip{transform:rotate(180deg)}
 .panel.lead .score{color:var(--ink)}
 .head{display:flex; align-items:center; gap:10px; min-width:0}
@@ -59,19 +59,20 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--brass); outline
 .score-box{margin-left:auto; display:flex; align-items:baseline; gap:8px; flex:none}
 .delta{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; min-width:2.5em; text-align:right; white-space:nowrap; word-spacing:2px}
 .delta b{color:var(--ink); font-size:15px}
-.score{font-family:var(--display); font-weight:800; font-size:38px; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.02em; background:none; border:0; padding:0}
+.score{font-family:var(--display); font-weight:800; font-size:32px; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.02em; background:none; border:0; padding:0}
 .togo{font-size:11px; color:var(--muted); letter-spacing:.04em}
 .hist{display:flex; gap:14px; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; min-height:18px; margin-top:-4px}
 .hist span{display:inline-flex; align-items:center; gap:5px; flex:none}
 .hist i{width:8px; height:8px; border-radius:50%; flex:none}
 .hist .new{color:var(--ink); font-weight:600}
 .chips{display:grid; grid-template-columns:repeat(7,1fr); gap:6px}
-.chip{height:46px; border-radius:12px; border:1px solid var(--line); background:var(--raised); font-family:var(--display); font-weight:700; font-size:19px; font-variant-numeric:tabular-nums; transition:transform .08s, background .15s}
+.chip{height:40px; border-radius:12px; border:1px solid var(--line); background:var(--raised); font-family:var(--display); font-weight:700; font-size:19px; font-variant-numeric:tabular-nums; transition:transform .08s, background .15s}
 .chip:active{transform:scale(.94)}
 .chip.more{font-size:15px; color:var(--muted)}
 
 .board-wrap{min-height:0; display:flex; align-items:center; justify-content:center}
-#board{width:100%; height:100%; display:block; filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+#board{width:100%; height:100%; display:block; filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.wins{font-size:11px; color:var(--muted); white-space:nowrap}
 .pulse{fill:none; stroke-width:1.6; transform-box:fill-box; transform-origin:center; animation:pulse .7s ease-out forwards}
 @keyframes pulse{from{opacity:.95; transform:scale(1)} to{opacity:0; transform:scale(2.4)}}
 .trail{fill:none; stroke-width:2.4; stroke-linecap:round; stroke-dasharray:.1 5.5; animation:fade 1.6s ease-in forwards}
@@ -80,7 +81,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--brass); outline
 @keyframes rise{from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-18px)}}
 
 .bar{display:flex; align-items:center; gap:8px}
-.tool{height:42px; min-width:42px; border-radius:12px; border:1px solid var(--line); background:var(--panel); display:grid; place-items:center; padding:0 10px}
+.tool{height:36px; min-width:36px; border-radius:12px; border:1px solid var(--line); background:var(--panel); display:grid; place-items:center; padding:0 10px}
 .tool svg{width:22px; height:22px}
 .tool:disabled{opacity:.4}
 .log{flex:1; min-width:0; text-align:center; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-variant-numeric:tabular-nums}
@@ -181,7 +182,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--brass); outline
 /* welcome */
 .welcome{position:fixed; inset:0; z-index:40; background:var(--table); overflow:auto; -webkit-user-select:none}
 .wel-inner{max-width:480px; margin:0 auto; box-sizing:border-box; padding-block:max(28px, env(safe-area-inset-top,0px)) max(28px, env(safe-area-inset-bottom,0px)); padding-left:max(20px, env(safe-area-inset-left,0px)); padding-right:max(20px, env(safe-area-inset-right,0px)); display:grid; gap:10px}
-.wel-brand{font-family:var(--display); font-weight:800; font-size:40px; letter-spacing:-.02em; line-height:1}
+.wel-brand{font-family:var(--display); font-weight:800; font-size:40px; letter-spacing:-.02em; line-height:1; margin-bottom:10px}
 .wel-tag{margin:0 0 10px; color:var(--muted); font-size:15px}
 .wel-label{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-top:6px}
 .wel-count{display:grid; grid-template-columns:repeat(3,1fr); margin:0}
@@ -256,7 +257,6 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--brass); outline
 <section class="welcome" id="welcome" hidden>
   <div class="wel-inner">
     <div class="wel-brand">Fifteen Two</div>
-    <p class="wel-tag">Cribbage, without the board.</p>
     <div class="wel-label">How many players?</div>
     <div class="seg wel-count" id="wel-count"><button data-n="2">2</button><button data-n="3">3</button><button data-n="4">4</button></div>
     <p class="sub" id="wel-note"></p>
@@ -307,43 +307,50 @@ const dealerSide = () => S.teams ? S.dealer % 2 : S.dealer;
 /* ---------- board geometry: one continuous painted track per player ---------- */
 // Classic board colors, outside track first. These never change with peg color.
 const TRACKS = {2:['#cc2f2a','#2b5fb4'], 3:['#cc2f2a','#3d9a4a','#2b5fb4'], 4:['#cc2f2a','#3d9a4a','#2b5fb4','#d9a520']};
-let B = {};   // geometry for the current number of players
+let B = {};
+// Wide board: the track snakes up and down through six columns of 20 holes, sized to fill the space it's given.
 function geometry(N){
-  const sp = N === 2 ? 18 : N === 3 ? 15 : 13, half = N*sp/2;
-  const D = Math.max(60, N*sp + 14);
-  const xL = 18 + half, xC = xL + D, xR = xL + 2*D, W = xR + half + 18;
-  const yT = 22 + D + half, yB = 470, H = Math.max(600, 552 + N*11 + 22);
-  const centerline = () => {
+  const wrap = document.querySelector('.board-wrap'), cw = wrap.clientWidth || 360, ch = wrap.clientHeight || 450;
+  const W = 360, H = Math.max(300, Math.min(760, W * ch / cw));
+  const K = 6, sp = N === 2 ? 22 : 16, band = N*sp, m = 12;
+  const spacing = (W - 2*m - band) / (K - 1), r = spacing / 2;
+  const xs = Array.from({length:K}, (_,c) => m + band/2 + c*spacing);
+  const rowH = 12, tallyH = N*rowH + 8;
+  const yTop = m + r + band/2 + 2, yBot = H - (m + r + band/2 + 18 + tallyH);
+  const GAP = .8, UNITS = 19 + 3*GAP, pitch = (yBot - yTop) / UNITS;
+  const u = i => (i + Math.floor(i/5)*GAP) * pitch;
+  // bottom turns run left to right underneath: rebuild those arcs going the right way
+  const centerline2 = () => {
     const pts = [];
     const line = (x1,y1,x2,y2) => { const L = Math.hypot(x2-x1,y2-y1); for (let s = 0; s < L; s += 1) pts.push([x1+(x2-x1)*s/L, y1+(y2-y1)*s/L]); };
-    const arc = (cx,cy,r,a1,a2) => { const n = Math.ceil(Math.abs(a2-a1)*r); for (let k = 0; k < n; k++){ const a = a1+(a2-a1)*k/n; pts.push([cx+r*Math.cos(a), cy+r*Math.sin(a)]); } };
-    line(xL,540, xL,yT); arc(xC,yT,D, Math.PI, 2*Math.PI); line(xR,yT, xR,yB); arc((xR+xC)/2,yB,D/2, 0, Math.PI); line(xC,yB, xC,yT+53); pts.push([xC,yT+53]);
+    const arc = (cx,cy,rr,a1,a2) => { const n = Math.ceil(Math.abs(a2-a1)*rr); for (let k = 0; k < n; k++){ const a = a1+(a2-a1)*k/n; pts.push([cx+rr*Math.cos(a), cy+rr*Math.sin(a)]); } };
+    for (let c = 0; c < K; c++){
+      const up = c % 2 === 0;
+      if (up) line(xs[c], c === 0 ? yBot + 8 : yBot, xs[c], yTop); else line(xs[c], yTop, xs[c], c === K-1 ? yBot + 8 : yBot);
+      if (c < K-1){ const cx = (xs[c]+xs[c+1])/2; if (up) arc(cx, yTop, r, Math.PI, 2*Math.PI); else arc(cx, yBot, r, Math.PI, 0); }
+    }
+    pts.push([xs[K-1], yBot + 8]);
     return pts;
   };
   const lane = d => {
-    const c = centerline(), out = [], cum = [0];
+    const c = centerline2(), out = [];
     for (let i = 0; i < c.length; i++){
       const a = c[Math.max(0,i-1)], b = c[Math.min(c.length-1,i+1)];
-      let tx = b[0]-a[0], ty = b[1]-a[1]; const m = Math.hypot(tx,ty) || 1; tx/=m; ty/=m;
+      let tx = b[0]-a[0], ty = b[1]-a[1]; const mm = Math.hypot(tx,ty) || 1; tx/=mm; ty/=mm;
       out.push([c[i][0] + ty*d, c[i][1] - tx*d]);
-      if (i) cum.push(cum[i-1] + Math.hypot(out[i][0]-out[i-1][0], out[i][1]-out[i-1][1]));
     }
-    const at = s => { let lo = 0, hi = cum.length-1; while (hi-lo > 1){ const mid = (lo+hi)>>1; if (cum[mid] <= s) lo = mid; else hi = mid; }
-      const f = (s-cum[lo]) / ((cum[hi]-cum[lo]) || 1); return [out[lo][0]+(out[hi][0]-out[lo][0])*f, out[lo][1]+(out[hi][1]-out[lo][1])*f]; };
-    return {pts: out, len: cum[cum.length-1], at};
+    return {pts: out};
   };
-  const offs = Array.from({length:N}, (_,j) => ((N-1)/2 - j) * sp);   // player 1 on the outside
-  const CENTER = lane(0), GAP = .8, U = 119 + 23*GAP;
-  // holes drilled in matching rows across every track
-  const HOLES = offs.map(d => Array.from({length:120}, (_,i) => {
-    const s = (i + Math.floor(i/5)*GAP) / U * (CENTER.len - 4);
-    const [x,y] = CENTER.at(s), A = CENTER.at(Math.max(0, s-.6)), Bp = CENTER.at(Math.min(CENTER.len, s+.6));
-    let tx = Bp[0]-A[0], ty = Bp[1]-A[1]; const m = Math.hypot(tx,ty) || 1;
-    return [x + ty/m*d, y - tx/m*d];
+  const offs = Array.from({length:N}, (_,j) => ((N-1)/2 - j) * sp);
+  const HOLES = offs.map(d => Array.from({length:120}, (_,n) => {
+    const c = Math.floor(n/20), i = n % 20, up = c % 2 === 0;
+    return up ? [xs[c] - d, yBot - u(i)] : [xs[c] + d, yTop + u(i)];
   }));
-  const START = offs.map(d => [[xL - d, 557], [xL - d, 569]]);
-  const games = p => Array.from({length:7}, (_,i) => [W - 20 - (6-i)*9, 552 + p*11]);
-  return {N, sp, half, D, xL, xC, xR, W, H, yT, offs, lane, CENTER, HOLES, START, FINISH:[xC, yT+35], games, tracks:TRACKS[N]};
+  const START = offs.map(d => [[xs[0] - d, yBot + 22], [xs[0] - d, yBot + 34]]);
+  // games won: a short row of seven holes per track along the bottom edge
+  const tallyY = yBot + r + band/2 + 16, tallyX = (xs[1] + xs[4]) / 2 + 14;
+  const games = p => Array.from({length:7}, (_,i) => [tallyX + (i-3)*15, tallyY + p*rowH]);
+  return {N, sp, band, W, H, xs, yTop, yBot, pitch, offs, lane, HOLES, START, FINISH:[xs[K-1], yBot + 30], games, tallyX, tallyY, rowH, tracks:TRACKS[N]};
 }
 function holeXY(p, n){ return n >= 121 ? B.FINISH : B.HOLES[p][n-1]; }
 function pegXY(p, k, n){ return n <= 0 ? B.START[p][k] : holeXY(p, n); }
@@ -354,60 +361,55 @@ const font = (size, extra={}) => Object.assign({'font-size':size, 'font-family':
 
 function buildBoard(){
   B = geometry(S.n);
-  const {N, sp, W, H, xL, xC, yT} = B;
+  const {N, sp, band, W, H, xs, yTop, yBot} = B;
   svg.innerHTML = '';
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const defs = el('defs', {}, svg);
-  const g = el('linearGradient', {id:'wood', x1:0, y1:0, x2:1, y2:0}, defs);
-  [['0','var(--wood2)'],['.25','var(--wood1)'],['.75','var(--wood1)'],['1','var(--wood2)']].forEach(([o,c]) => el('stop', {offset:o, 'stop-color':c}, g));
-  el('clipPath', {id:'clip'}, defs).appendChild(el('rect', {x:8, y:8, width:W-16, height:H-16, rx:14}));
-  el('rect', {x:8, y:8, width:W-16, height:H-16, rx:14, fill:'url(#wood)'}, svg);
+  const g = el('linearGradient', {id:'wood', x1:0, y1:0, x2:1, y2:1}, defs);
+  [['0','var(--wood1)'],['.6','var(--wood1)'],['1','var(--wood2)']].forEach(([o,c]) => el('stop', {offset:o, 'stop-color':c}, g));
+  el('clipPath', {id:'clip'}, defs).appendChild(el('rect', {x:2, y:2, width:W-4, height:H-4, rx:14}));
+  el('rect', {x:2, y:2, width:W-4, height:H-4, rx:14, fill:'url(#wood)'}, svg);
   const grain = el('g', {'clip-path':'url(#clip)', fill:'none', stroke:'var(--wood3)'}, svg);
   let seed = 5; const rnd = () => (seed = (seed*9301 + 49297) % 233280) / 233280;
-  for (let k = 0; k < Math.round(W/11); k++){
-    let x = 8 + k*11 + rnd()*5, d = `M${x.toFixed(1)} 0`;
+  for (let k = 0; k < 30; k++){
+    let x = 2 + k*12.5 + rnd()*5, d = `M${x.toFixed(1)} 0`;
     for (let y = 40; y <= H + 40; y += 40){ x += (rnd()-.5)*6; d += ` Q${(x+(rnd()-.5)*8).toFixed(1)} ${y-20} ${x.toFixed(1)} ${y}`; }
     el('path', {d, 'stroke-width':(.4 + rnd()*1.1).toFixed(2), opacity:(.07 + rnd()*.14).toFixed(2)}, grain);
   }
-  el('line', {x1:8, x2:W-8, y1:H/2, y2:H/2, stroke:'var(--wood3)', 'stroke-width':1, opacity:.45}, svg);
-  el('rect', {x:8, y:8, width:W-16, height:H-16, rx:14, fill:'none', stroke:'var(--wood3)', 'stroke-width':2, opacity:.7}, svg);
-  // painted tracks, touching like a real board, with a thin seam between them
+  el('rect', {x:2, y:2, width:W-4, height:H-4, rx:14, fill:'none', stroke:'var(--wood3)', 'stroke-width':2, opacity:.7}, svg);
   const toD = pts => 'M' + pts.filter((_,i) => i % 3 === 0 || i === pts.length-1).map(p => p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');
-  B.offs.forEach((d,p) => el('path', {d: toD(B.lane(d).pts), fill:'none', stroke:B.tracks[p], 'stroke-width':sp, 'stroke-linecap':'round', 'stroke-linejoin':'round'}, svg));
-  for (let p = 0; p < N-1; p++) el('path', {d: toD(B.lane((B.offs[p]+B.offs[p+1])/2).pts), fill:'none', stroke:'#2a170a', 'stroke-width':.6, opacity:.35}, svg);
-  // start stubs and game tally strips
-  B.offs.forEach((d,p) => {
-    el('rect', {x: xL - d - sp/2, y:548, width:sp, height:30, fill:B.tracks[p]}, svg);
-    const r = B.games(p); el('rect', {x:r[0][0]-6, y:r[0][1]-4.5, width:r[6][0]-r[0][0]+12, height:9, rx:2, fill:B.tracks[p]}, svg);
-  });
-  const ly = 552 + N*11 + 10;
-  el('text', font(7, {x:xL, y:Math.max(ly, 589), 'letter-spacing':1}), svg).textContent = 'START';
-  el('text', font(7, {x:B.games(0)[3][0], y:ly, 'letter-spacing':1}), svg).textContent = 'GAMES';
-  el('text', font(7, {x:xC, y:yT+18, 'letter-spacing':1}), svg).textContent = 'FINISH';
-  el('path', {d:`M${xC} ${yT+21} l-3 5 h6 z`, fill:'var(--hole)', opacity:.8}, svg);
-  // milestones every 30, and the skunk line between 90 and 91
-  const ms = el('g', {'stroke-linecap':'round'}, svg);
-  [[30,1,'30'],[60,1,'60'],[90,-1,'SKUNK'],[120,-1,'120']].forEach(([n,side,label]) => {
-    const mid = p => n < 120 ? [(B.HOLES[p][n-1][0]+B.HOLES[p][n][0])/2, (B.HOLES[p][n-1][1]+B.HOLES[p][n][1])/2] : B.HOLES[p][n-1];
-    const a = mid(0), b = mid(N-1), m = Math.hypot(a[0]-b[0], a[1]-b[1]), o = [(a[0]-b[0])/m, (a[1]-b[1])/m];
-    const skunk = n === 90, color = skunk ? 'var(--skunk)' : 'var(--hole)', e = sp/2 + .5;
-    if (n < 120) el('line', {x1:a[0]+o[0]*e, y1:a[1]+o[1]*e, x2:b[0]-o[0]*e, y2:b[1]-o[1]*e, stroke:color, 'stroke-width': skunk ? 2.2 : 1.4, opacity: skunk ? 1 : .75}, ms);
-    const base = side > 0 ? a : b, dist = sp/2 + (skunk ? 13 : 8);
-    el('text', font(skunk ? 6.2 : 7, {x: base[0] + o[0]*dist*side, y: base[1] + o[1]*dist*side + 2.4, fill: color, 'letter-spacing': skunk ? .6 : 0}), ms).textContent = label;
+  B.offs.forEach((d,p) => el('path', {d: toD(B.lane(d).pts), fill:'none', stroke:B.tracks[p], 'stroke-width':sp, 'stroke-linecap':'butt', 'stroke-linejoin':'round'}, svg));
+  for (let p = 0; p < N-1; p++) el('path', {d: toD(B.lane((B.offs[p]+B.offs[p+1])/2).pts), fill:'none', stroke:'#2a170a', 'stroke-width':.7, opacity:.35}, svg);
+  // start stubs
+  B.offs.forEach((d,p) => el('rect', {x: xs[0] - d - sp/2, y: yBot + 8, width: sp, height: 34, fill: B.tracks[p]}, svg));
+  el('text', font(8, {x:xs[0], y:yBot + 54, 'letter-spacing':1}), svg).textContent = 'START';
+  el('text', font(8, {x:xs[5], y:yBot + 50, 'letter-spacing':1}), svg).textContent = 'FINISH';
+  // games won strips
+  B.offs.forEach((d,p) => { const row = B.games(p); el('rect', {x: row[0][0]-8, y: row[0][1]-5, width: row[6][0]-row[0][0]+16, height: 10, rx: 2, fill: B.tracks[p]}, svg); });
+  el('text', font(8, {x: B.games(0)[0][0] - 14, y: B.tallyY + (N-1)*B.rowH/2 + 3, 'letter-spacing':1, 'text-anchor':'end'}), svg).textContent = 'GAMES';
+  // milestones sit in the gap between groups of five
+  const ms = el('g', {}, svg);
+  [[30,'30'],[60,'60'],[90,'SKUNK'],[120,'120']].forEach(([n,label]) => {
+    const a = B.HOLES[0][n-1], bq = B.HOLES[N-1][n-1];
+    const c = Math.floor((n-1)/20), up = c % 2 === 0, x = xs[c];
+    const end = n % 20 === 0, y = end ? (up ? yTop - 8 : yBot + 8) : (B.HOLES[0][n-1][1] + B.HOLES[0][n][1]) / 2;
+    const skunk = n === 90, color = skunk ? 'var(--skunk)' : 'var(--hole)';
+    el('line', {x1: x - band/2, x2: x + band/2, y1: y, y2: y, stroke: color, 'stroke-width': skunk ? 2.4 : 1.5, opacity: skunk ? 1 : .8}, ms);
+    const t = el('text', font(skunk ? 6.5 : 7.5, {x, y: y + 2.6, fill: color, 'letter-spacing': skunk ? .8 : 0, 'paint-order':'stroke', stroke:'var(--wood1)', 'stroke-width':4}), ms); t.textContent = label;
   });
   // holes
-  const hr = Math.min(2.5, sp*.17), holes = el('g', {fill:'var(--hole)'}, svg);
-  const hole = ([x,y], r=hr) => { el('circle', {cx:x, cy:y+.5, r:r+.6, fill:'#fff', opacity:.22}, holes); el('circle', {cx:x, cy:y, r}, holes); };
-  for (let p = 0; p < N; p++){ B.HOLES[p].forEach(h => hole(h)); B.START[p].forEach(h => hole(h)); B.games(p).forEach(h => hole(h, 2)); }
-  hole(B.FINISH, 3.8);
-  svg.gamePegs = S.players.map(() => el('circle', {r:3.4, 'stroke-width':.8}, svg));
+  const hr = Math.min(3.4, sp*.17), holes = el('g', {fill:'var(--hole)'}, svg);
+  const hole = ([x,y], rr=hr) => { el('circle', {cx:x, cy:y+.6, r:rr+.7, fill:'#fff', opacity:.22}, holes); el('circle', {cx:x, cy:y, r:rr}, holes); };
+  for (let p = 0; p < N; p++){ B.HOLES[p].forEach(h => hole(h)); B.START[p].forEach(h => hole(h)); B.games(p).forEach(h => hole(h, 2.6)); }
+  hole(B.FINISH, 5);
+  svg.gamePegs = S.players.map(() => el('circle', {r:4.4, 'stroke-width':1}, svg));
   svg.fx = el('g', {}, svg);
-  const pr = Math.min(5.2, sp*.33);
+  const pr = Math.min(7, sp*.32);
   svg.pegs = S.players.map(() => [0,1].map(() => {
     const g = el('g', {class:'peg'}, svg);
     const b = el('g', {class:'body'}, g);
-    el('ellipse', {cx:1.4, cy:2, rx:pr+.2, ry:pr-.6, fill:'#000', opacity:.35}, b);
-    const c = el('circle', {r:pr, 'stroke-width':1.1}, b);
+    el('ellipse', {cx:1.6, cy:2.4, rx:pr+.2, ry:pr-.6, fill:'#000', opacity:.35}, b);
+    const c = el('circle', {r:pr, 'stroke-width':1.2}, b);
     el('circle', {cx:-pr*.33, cy:-pr*.36, r:pr*.33, fill:'#fff', opacity:.6}, b);
     g.c = c; return g;
   }));
@@ -418,7 +420,7 @@ function placePegs(){
     const c = col(pl.color);
     const gp = svg.gamePegs[p], gw = Math.min(S.games[p], 7);
     gp.style.display = gw ? '' : 'none';
-    if (gw){ const [x,y] = B.games(p)[gw-1]; gp.setAttribute('cx', x); gp.setAttribute('cy', y); gp.setAttribute('fill', c.dark); gp.setAttribute('stroke', '#fff'); }
+    if (gw){ const [x,y] = B.games(p)[gw-1]; gp.setAttribute('cx', x); gp.setAttribute('cy', y); gp.setAttribute('fill', c.hex); gp.setAttribute('stroke', '#fff'); gp.setAttribute('stroke-width', 1.6); }
     pl.pegs.forEach((n,k) => {
       const g = svg.pegs[p][k], [x,y] = pegXY(p,k,n);
       g.c.setAttribute('fill', c.hex); g.c.setAttribute('stroke', '#2a170a');
@@ -775,7 +777,7 @@ $('wel-start').addEventListener('click', () => {
   S.games = Array(S.n).fill(0);   // a fresh setup starts the match over
   S.hist = []; S.winner = null; S.dealer = 0; S.sel = 0;
   $('welcome').hidden = true; $('win').hidden = true;
-  save(); buildBoard(); render();
+  save(); buildBoard(); render(); buildBoard(); render();
 });
 $('wel-resume').addEventListener('click', () => {
   // keep the score; take name and color changes if the game type didn't change
@@ -824,7 +826,8 @@ const wake = () => { if (navigator.wakeLock && !lock) navigator.wakeLock.request
 document.addEventListener('pointerdown', wake, {passive:true});
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') wake(); });
 
-buildBoard(); render(); openWelcome();
+buildBoard(); render(); buildBoard(); render(); openWelcome();
+let rsT; window.addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { buildBoard(); render(); }, 150); });
 })();
 </script>
 
