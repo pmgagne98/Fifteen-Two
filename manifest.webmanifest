@@ -1,0 +1,15 @@
+{
+  "name": "Fifteen Two",
+  "short_name": "Fifteen Two",
+  "description": "A clean cribbage board for your phone, with a hand counter that shows how every point is scored.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#dde5dc",
+  "theme_color": "#dde5dc",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
